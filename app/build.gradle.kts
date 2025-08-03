@@ -9,7 +9,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.atesz.mytodoapp"
+
         minSdk = 31
         targetSdk = 36
         versionCode = 1
