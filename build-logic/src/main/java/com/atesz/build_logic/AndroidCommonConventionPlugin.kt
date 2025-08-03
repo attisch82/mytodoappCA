@@ -22,7 +22,7 @@ class AndroidCommonConventionPlugin : Plugin<Project> {
             compileSdk = 34
 
             defaultConfig {
-                minSdk = 21
+                minSdk = 31
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
