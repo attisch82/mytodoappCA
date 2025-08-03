@@ -20,6 +20,10 @@ gradlePlugin {
             id = "com.atesz.android.application"
             implementationClass = "com.atesz.buildlogic.AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "com.atesz.android.library"
+            implementationClass = "com.atesz.buildlogic.AndroidLibraryConventionPlugin"
+        }
     }
 }
 
