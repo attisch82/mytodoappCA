@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyTodoApp"
 include(":app")
-include(":build-logic")
+includeBuild("build-logic")

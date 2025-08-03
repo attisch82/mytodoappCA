@@ -1,6 +1,7 @@
 package com.atesz.build_logic
 
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -8,35 +9,39 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 class AndroidCommonConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        val androidPluginIds = listOf("com.android.application", "com.android.library")
-
-        androidPluginIds.forEach { pluginId ->
-            target.pluginManager.withPlugin(pluginId) {
-                configureCommonExtension(target)
+    override fun apply(project: Project) {
+        project.pluginManager.withPlugin("com.android.application") {
+            project.extensions.configure<BaseAppModuleExtension> {
+                configureAndroidCommon(this)
             }
         }
-    }
-    private fun configureCommonExtension(project: Project) {
-        project.extensions.configure<CommonExtension<*, *, *, *, *, *>> {
-            compileSdk = 34
 
-            defaultConfig {
-                minSdk = 31
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-            }
-
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_21
-                targetCompatibility = JavaVersion.VERSION_21
-            }
-
-            packaging {
-                resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        project.pluginManager.withPlugin("com.android.library") {
+            project.extensions.configure<LibraryExtension> {
+                configureAndroidCommon(this)
             }
         }
+
         project.extensions.configure<KotlinAndroidProjectExtension> {
             jvmToolchain(21)
+        }
+    }
+
+    private fun configureAndroidCommon(extension: com.android.build.api.dsl.CommonExtension<*, *, *, *, *, *>) {
+        extension.compileSdk = 34
+
+        extension.defaultConfig {
+            minSdk = 31
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+        extension.compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
+        }
+
+        extension.packaging {
+            resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }

@@ -14,15 +14,15 @@ gradlePlugin {
     plugins {
         register("androidCommon") {
             id = "com.atesz.android.common"
-            implementationClass = "com.atesz.buildlogic.AndroidCommonConventionPlugin"
+            implementationClass = "com.atesz.build_logic.AndroidCommonConventionPlugin"
         }
         register("androidApplication") {
             id = "com.atesz.android.application"
-            implementationClass = "com.atesz.buildlogic.AndroidApplicationConventionPlugin"
+            implementationClass = "com.atesz.build_logic.AndroidApplicationConventionPlugin"
         }
         register("androidLibrary") {
             id = "com.atesz.android.library"
-            implementationClass = "com.atesz.buildlogic.AndroidLibraryConventionPlugin"
+            implementationClass = "com.atesz.build_logic.AndroidLibraryConventionPlugin"
         }
     }
 }
