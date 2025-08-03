@@ -16,6 +16,10 @@ gradlePlugin {
             id = "com.atesz.android.common"
             implementationClass = "com.atesz.buildlogic.AndroidCommonConventionPlugin"
         }
+        register("androidApplication") {
+            id = "com.atesz.android.application"
+            implementationClass = "com.atesz.buildlogic.AndroidApplicationConventionPlugin"
+        }
     }
 }
 
